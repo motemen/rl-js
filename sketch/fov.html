@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+pre#screen {
+  color: #FFF;
+  background-color: #000;
+  display: inline-block;
+}
+    </style>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+    <script src="../lib/Random.js"></script>
+    <script src="../lib/Color.js"></script>
+    <script src="../lib/Map.js"></script>
+    <script src="../lib/Light.js"></script>
+    <script src="../lib/FOV.js"></script>
+    <script src="../lib/Keymap.js"></script>
+    <script src="../lib/Game.js"></script>
+    <script>
+$(function () {
+  var map = new Map({ width: 20, height: 10, defaultValue: Tile.FLOOR });
+  for (var i = 0, c = Random.between(10, 25); i < c; i++) {
+      map.set(Random.between(map.left, map.right), Random.between(map.top, map.bottom), Tile.WALL);
+  }
+  var game = new Game({ map: map, screen: '#screen' });
+  game.keymap = new Keymap(game);
+  game.keymap.register('#screen');
+  game.render();
+});
+    </script>
+  </head>
+  <body>
+    <pre id="screen" tabindex="0"></pre>
+  </body>
+</html>
+
